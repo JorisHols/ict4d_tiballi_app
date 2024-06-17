@@ -1,5 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
-from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import MongoClient
 from bson import ObjectId
 import uvicorn
 import os
@@ -9,8 +9,8 @@ import gridfs
 app = FastAPI()
 
 # Initialize MongoDB client
-client = AsyncIOMotorClient('mongodb://mongo:DgycJxuOGTtPTGkZNwFBMPjWUJrnxGZI@viaduct.proxy.rlwy.net:21552')
-db = client['image_database']
+client = MongoClient('mongodb://mongo:DgycJxuOGTtPTGkZNwFBMPjWUJrnxGZI@viaduct.proxy.rlwy.net:21552')
+db =  client['test']
 fs = gridfs.GridFS(db)
 
 @app.post("/uploadimage/")
@@ -20,4 +20,4 @@ async def upload_image(file: UploadFile = File(...)):
     return {"image_id": str(image_id)}
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=os.getenv("PORT", default=5000), log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=os.getenv("PORT", default=8080), log_level="info")
