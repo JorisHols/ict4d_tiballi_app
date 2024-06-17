@@ -1,0 +1,6 @@
+fastapi
+python-multipart
+motor
+pymongo[srv,tls]
+uvicorn
+gridfs
