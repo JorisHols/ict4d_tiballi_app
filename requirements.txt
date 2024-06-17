@@ -4,3 +4,4 @@ motor
 pymongo[srv,tls]
 uvicorn
 python-multipart
+Pillow
